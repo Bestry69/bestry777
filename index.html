@@ -3,275 +3,279 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mini Game by Gemini</title>
+    <title>สุขสันต์วันเกิด!</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;600&display=swap" rel="stylesheet">
-    
+    <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        /* --- การตั้งค่าโดยรวม --- */
         body {
             margin: 0;
             font-family: 'Kanit', sans-serif;
-            overflow: hidden; /* ซ่อน scrollbar */
-            color: #fff;
-            text-align: center;
-        }
-
-        .page {
-            width: 100vw;
-            height: 100vh;
+            background: linear-gradient(180deg, #ff9a8b 0%, #ff6a88 100%);
+            color: white;
+            overflow: hidden;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: absolute;
-            top: 0;
-            left: 0;
-            transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+            height: 100vh;
+            text-align: center;
+            cursor: default;
         }
 
-        /* --- หน้าหลัก --- */
-        #home {
-            background: linear-gradient(45deg, #2c3e50, #3498db, #2980b9);
-            background-size: 300% 300%;
-            animation: gradient-animation 15s ease infinite;
+        .container {
+            position: relative;
             z-index: 2;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 1.5s ease-in-out;
         }
 
-        #home h1 {
-            font-size: 4rem;
-            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 2.8em;
             margin-bottom: 10px;
-        }
-
-        #home p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
-
-        .play-button {
-            padding: 15px 40px;
-            font-size: 1.5rem;
-            font-family: 'Kanit', sans-serif;
-            border: 2px solid #fff;
-            border-radius: 50px;
-            background-color: transparent;
-            color: #fff;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
-
-        .play-button:hover {
-            background-color: #fff;
-            color: #2c3e50;
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
-        }
-
-        /* --- หน้าเกม --- */
-        #game-page {
-            background-color: #1a1a2e;
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            animation: bounceIn 1s ease 0.5s forwards;
             opacity: 0;
-            transform: translateY(100%);
+        }
+        
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .cake {
+            width: 150px;
+            margin: 20px 0;
+            opacity: 0;
+            animation: 
+                cakeAppear 1s ease-out 1.5s forwards,
+                shake 2s infinite 2.5s;
+        }
+        
+        @keyframes cakeAppear {
+            from { opacity: 0; transform: scale(0.5); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0) scale(1); }
+            25% { transform: translateX(-5px) rotate(-2deg) scale(1); }
+            75% { transform: translateX(5px) rotate(2deg) scale(1); }
+        }
+
+        p {
+            font-size: 1.2em;
+            margin: 0;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        p:nth-of-type(1) {
+             animation-delay: 2.5s;
+        }
+        p:nth-of-type(2) {
+            animation-delay: 3.0s;
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .balloon {
+            position: absolute;
+            bottom: -150px;
+            width: 70px;
+            height: 90px;
+            background-color: #ffcc00;
+            border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+            animation: float 10s infinite ease-in-out;
+            opacity: 0.7;
             z-index: 1;
         }
+
+        .balloon::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 20px;
+            background: rgba(255,255,255,0.5);
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-110vh) rotate(15deg); }
+            100% { transform: translateY(0) rotate(-15deg); }
+        }
+
+        .balloon:nth-child(1) { left: 10%; background: #ff5e57; animation-duration: 12s; }
+        .balloon:nth-child(2) { left: 80%; background: #48dbfb; animation-duration: 9s; animation-delay: 2s; }
+        .balloon:nth-child(3) { left: 40%; background: #1dd1a1; animation-duration: 15s; animation-delay: 5s; }
+
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f1c40f;
+            top: -20px;
+            opacity: 0.8;
+            animation: fall 5s infinite linear;
+            z-index: 3;
+        }
         
-        #game-container {
-            width: 80%;
-            max-width: 600px;
-            height: 70vh;
-            background-color: #16213e;
-            border: 3px solid #0f3460;
-            border-radius: 20px;
-            position: relative;
-            box-shadow: 0 0 20px rgba(224, 16, 105, 0.5);
-            overflow: hidden;
+        @keyframes fall {
+            from { transform: translateY(0) rotate(0deg); }
+            to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
         }
 
-        #stats-bar {
-            display: flex;
-            justify-content: space-around;
-            padding: 15px;
-            font-size: 1.5rem;
-            background-color: rgba(0,0,0,0.2);
-        }
-
-        #target {
-            width: 60px;
-            height: 60px;
-            background-color: #e94560;
+        #glow-pointer {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            position: absolute;
-            cursor: pointer;
-            transition: all 0.1s ease-out;
-            box-shadow: 0 0 15px #e94560, inset 0 0 10px rgba(255,255,255,0.5);
-        }
-
-        #target:hover {
-            transform: scale(1.1);
+            pointer-events: none;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            transition: width 0.3s, height 0.3s;
+            box-shadow: 0 0 40px 20px rgba(255, 255, 255, 0.15);
         }
         
-        #game-over-screen {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(26, 26, 46, 0.9);
+        /* [ใหม่] สไตล์สำหรับปุ่มควบคุมเพลง */
+        #music-button {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            width: 45px;
+            height: 45px;
+            font-size: 20px;
+            border-radius: 50%;
+            border: 1px solid white;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            cursor: pointer;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.4s ease;
+            transition: transform 0.2s;
+        }
+        #music-button:hover {
+            transform: scale(1.1);
         }
 
-        #game-over-screen h2 {
-            font-size: 3.5rem;
-            color: #e94560;
-        }
-
-        #game-over-screen p {
-            font-size: 1.8rem;
-        }
-        
-        .hidden {
-            display: none;
-        }
-
-        /* --- อนิเมชันพื้นหลัง --- */
-        @keyframes gradient-animation {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
     </style>
 </head>
 <body>
+    <div id="glow-pointer"></div>
 
-    <div id="home" class="page">
-        <h1>ยินดีต้อนรับ</h1>
-        <p>ทดสอบความไวของคุณในเกมคลิกเกอร์</p>
-        <button id="startGameBtn" class="play-button">เริ่มเกม!</button>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+    <div class="balloon"></div>
+
+    <div class="container">
+        <h1>สุขสันต์วันเกิด!</h1>
+        <img src="https://em-content.zobj.net/source/microsoft-teams/363/birthday-cake_1f382.png" alt="เค้กวันเกิด" class="cake">
+        <p>ขอให้มีความสุขมากๆ นะ</p>
+        <p>คิดอะไรก็สมหวังทุกประการ!</p>
     </div>
 
-    <div id="game-page" class="page">
-        <div id="stats-bar">
-            <span>คะแนน: <span id="score">0</span></span>
-            <span>เวลา: <span id="time">15</span></span>
-        </div>
-        <div id="game-container">
-            <div id="target"></div>
-            
-            <div id="game-over-screen">
-                <h2>หมดเวลา!</h2>
-                <p>คะแนนสุดท้ายของคุณ: <span id="final-score">0</span></p>
-                <button id="playAgainBtn" class="play-button">เล่นอีกครั้ง</button>
-            </div>
-        </div>
-         <button id="backToHomeBtn" class="play-button" style="margin-top:20px; padding: 10px 25px; font-size: 1rem;">กลับหน้าหลัก</button>
-    </div>
+    <div id="confetti-container"></div>
+    
+    <audio id="birthday-song" src="https://www.chosic.com/wp-content/uploads/2021/07/Happy-Birthday-Music-Box.mp3" loop></audio>
+    <button id="music-button">🎵</button>
 
     <script>
-        // --- ตัวแปรอ้างอิง Element ---
-        const homePage = document.getElementById('home');
-        const gamePage = document.getElementById('game-page');
-        const startGameBtn = document.getElementById('startGameBtn');
-        const playAgainBtn = document.getElementById('playAgainBtn');
-        const backToHomeBtn = document.getElementById('backToHomeBtn');
+        const confettiContainer = document.getElementById('confetti-container');
+        const colors = ['#f1c40f', '#e74c3c', '#3498db', '#2ecc71', '#9b59b6', '#ffffff'];
 
-        const scoreDisplay = document.getElementById('score');
-        const timeDisplay = document.getElementById('time');
-        const target = document.getElementById('target');
-        const gameContainer = document.getElementById('game-container');
+        function createConfetti() {
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.classList.add('confetti');
+                
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.animationDuration = (Math.random() * 3) + 3 + 's';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                
+                if (Math.random() > 0.5) {
+                    confetti.style.borderRadius = '50%';
+                    confetti.style.width = '8px';
+                    confetti.style.height = '8px';
+                }
+
+                confettiContainer.appendChild(confetti);
+            }
+        }
+        window.onload = createConfetti;
+
+        const glowPointer = document.getElementById('glow-pointer');
+
+        function updateGlowPointer(x, y) {
+            glowPointer.style.left = x + 'px';
+            glowPointer.style.top = y + 'px';
+        }
+
+        window.addEventListener('mousemove', e => {
+            updateGlowPointer(e.clientX, e.clientY);
+        });
+
+        window.addEventListener('touchmove', e => {
+            if (e.touches.length > 0) {
+                updateGlowPointer(e.touches[0].clientX, e.touches[0].clientY);
+            }
+        });
+
+        // --- [ใหม่] JavaScript สำหรับควบคุมเพลง ---
+        const song = document.getElementById('birthday-song');
+        const musicButton = document.getElementById('music-button');
+        let isPlaying = false;
+
+        // ฟังก์ชันสำหรับเริ่มเล่นเพลง
+        function playMusic() {
+            song.play().then(() => {
+                isPlaying = true;
+                musicButton.textContent = '🎵'; // แสดงอีโมจิปกติ
+            }).catch(() => {
+                // ถ้าเบราว์เซอร์บล็อก ให้รอผู้ใช้กดเอง
+                isPlaying = false;
+                musicButton.textContent = '🔇'; // แสดงว่าเพลงปิดอยู่
+            });
+        }
+
+        // เมื่อผู้ใช้เริ่มมีการโต้ตอบกับหน้าเว็บ (เช่น คลิก) ให้เริ่มเล่นเพลง
+        document.body.addEventListener('click', playMusic, { once: true });
+        document.body.addEventListener('touchstart', playMusic, { once: true });
         
-        const gameOverScreen = document.getElementById('game-over-screen');
-        const finalScoreDisplay = document.getElementById('final-score');
-
-        // --- ตัวแปรสำหรับเกม ---
-        let score = 0;
-        let timeLeft = 15;
-        let timerId = null;
-
-        // --- ฟังก์ชันสลับหน้า ---
-        function showGamePage() {
-            homePage.style.opacity = '0';
-            homePage.style.transform = 'translateY(-100%)';
-            gamePage.style.opacity = '1';
-            gamePage.style.transform = 'translateY(0)';
-            startGame();
-        }
-
-        function showHomePage() {
-            gamePage.style.opacity = '0';
-            gamePage.style.transform = 'translateY(100%)';
-            homePage.style.opacity = '1';
-            homePage.style.transform = 'translateY(0)';
-        }
-
-        // --- ฟังก์ชันหลักของเกม ---
-        function startGame() {
-            // รีเซ็ตค่าเริ่มต้น
-            score = 0;
-            timeLeft = 15;
-            scoreDisplay.textContent = score;
-            timeDisplay.textContent = timeLeft;
-            
-            // ซ่อนหน้าจอ Game Over
-            gameOverScreen.style.opacity = '0';
-            gameOverScreen.style.visibility = 'hidden';
-            target.style.display = 'block';
-
-            moveTarget();
-
-            // เริ่มนับเวลาถอยหลัง
-            timerId = setInterval(updateTimer, 1000);
-        }
-
-        function updateTimer() {
-            timeLeft--;
-            timeDisplay.textContent = timeLeft;
-            if (timeLeft === 0) {
-                endGame();
+        // ควบคุมการเปิด/ปิดเพลงผ่านปุ่ม
+        musicButton.addEventListener('click', (e) => {
+            e.stopPropagation(); // ป้องกันไม่ให้ event click ทะลุไปที่ body
+            if (isPlaying) {
+                song.pause();
+                musicButton.textContent = '🔇';
+            } else {
+                song.play();
+                musicButton.textContent = '🎵';
             }
-        }
-
-        function endGame() {
-            clearInterval(timerId); // หยุดนับเวลา
-            target.style.display = 'none'; // ซ่อนเป้า
-            finalScoreDisplay.textContent = score;
-            gameOverScreen.style.opacity = '1';
-            gameOverScreen.style.visibility = 'visible';
-        }
-
-        function moveTarget() {
-            const containerWidth = gameContainer.clientWidth;
-            const containerHeight = gameContainer.clientHeight;
-            const targetSize = target.clientWidth;
-
-            const randomX = Math.floor(Math.random() * (containerWidth - targetSize));
-            const randomY = Math.floor(Math.random() * (containerHeight - targetSize));
-
-            target.style.left = `${randomX}px`;
-            target.style.top = `${randomY}px`;
-        }
-
-        function onTargetClick() {
-            if (timeLeft > 0) {
-                score++;
-                scoreDisplay.textContent = score;
-                moveTarget();
-            }
-        }
-
-        // --- การผูก Event Listener ---
-        startGameBtn.addEventListener('click', showGamePage);
-        playAgainBtn.addEventListener('click', startGame);
-        backToHomeBtn.addEventListener('click', showHomePage);
-        target.addEventListener('click', onTargetClick);
+            isPlaying = !isPlaying;
+        });
 
     </script>
 </body>
